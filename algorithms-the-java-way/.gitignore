@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/settings.json
+*.swp
+*~
+
+# Generated outputs (Markdown is the source of truth)
+*.pdf
+*.html
+dist/
+build/
+_site/
+
+# Python (legacy PDF toolchain)
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
