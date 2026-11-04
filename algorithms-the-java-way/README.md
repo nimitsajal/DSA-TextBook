@@ -44,7 +44,9 @@ algorithms-the-java-way/
 | Chapter 4 | Java Toolkit for Data Structures and Algorithms | ✅ Complete |
 | Chapter 5 | Recursion: Learning to Think Recursively | ✅ Complete |
 | Chapter 6 | Asymptotic Analysis: Measuring Algorithm Efficiency | ✅ Complete |
-| Chapters 7–74 | See [INDEX.md](INDEX.md) | 🔲 Planned |
+| Part I Review | The Foundations, Revisited (interlude) | ✅ Complete |
+| Chapter 7 | Arrays: Foundations and Memory Model | ✅ Complete |
+| Chapters 8–74 | See [INDEX.md](INDEX.md) | 🔲 Planned |
 
 ---
 

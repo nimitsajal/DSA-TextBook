@@ -140,9 +140,21 @@
 
 ---
 
+### ✅ [Part I Review — The Foundations, Revisited](chapters/part-01-review.md)
+
+- The Algorithm Detective: a cross-chapter narrative
+- Concept map: how the six foundations interconnect
+- The Six Principles: core idea from each chapter distilled to one line
+- Five cross-chapter challenges (Chapters 2+3, 5+6, 1+4, 3+5, 2+6)
+- Part I lightning quiz (10 questions)
+- Grand Integration Problem: Single Number III — all six chapters
+- Looking ahead: how Part I lives inside Part II
+
+---
+
 ## Part II — Arrays and Array Patterns
 
-### 🔲 Chapter 7 — Arrays: Foundations and Memory Model
+### ✅ Chapter 7 — [Arrays: Foundations and Memory Model](chapters/chapter-07-arrays.md)
 
 - Array representation in Java
 - Indexing and random access
