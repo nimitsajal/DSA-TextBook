@@ -131,7 +131,15 @@ Array (0-indexed): [1, 3, 5, 7, 9, 8, 11]
 
 ### Insert (Sift Up / Bubble Up)
 
-Add the new element at the **end** of the array (maintaining completeness), then **sift it up** by swapping with its parent until the heap property is restored.
+**Intuition:** The two constraints a heap must maintain are:
+1. **Shape:** Complete binary tree (no gaps in the array)
+2. **Order:** Every parent ≤ its children (min heap)
+
+When we insert, we first satisfy shape by appending to the end (the next available position). But this may violate order — the new element might be smaller than its parent. So we "bubble up": repeatedly swap the new element with its parent until the parent is smaller (or we reach the root).
+
+**Why only compare with the parent?** A node's subtree below it is already a valid heap before the insert. Only the path from the new element to the root can be violated.
+
+**Termination guarantee:** Each swap moves the element one level up. The tree has height O(log n), so at most O(log n) swaps.
 
 ```java
 class MinHeap {
@@ -174,6 +182,16 @@ Step 4: Parent of 1 = 0; data[0]=1 ≤ 2 → stop ✓
 ---
 
 ### Extract Min (Sift Down / Bubble Down)
+
+**Intuition:** We want to remove the root (minimum). Two naive ideas fail:
+1. Remove the root and promote one child — leaves a hole that's hard to fix recursively.
+2. Remove the root and shift all elements — O(n) time.
+
+**Better approach:** Swap the root with the *last element* (maintaining shape), reduce the size by 1, then "sift down" the displaced element. Sifting down: compare the element with both children, swap with the *smaller* child if smaller than the element. Repeat until the element is ≤ both children.
+
+**Why swap with the smaller child?** We want the new root to be as small as possible. If we swapped with the larger child, it might become the parent of the smaller child — violating heap order. Always swapping with the minimum child ensures the new parent is valid relative to both children.
+
+**Why only sift down (not up)?** The displaced element (last element) was a leaf — it has no children, so it can only violate the "parent ≤ children" rule going downward, never upward.
 
 Replace the root with the **last element**, shrink the size, then **sift down** by repeatedly swapping with the smaller child until the heap property is restored.
 
@@ -324,17 +342,39 @@ for (int x : arr) fromArray.offer(x);  // O(n log n)
 
 **Problem:** Find the K largest (or K smallest) elements in an array of $n$ elements.
 
+**Building the intuition — this is the most counterintuitive heap problem:**
+
+First instinct: "I want K largest, so I'll use a MAX heap." That gives you the K largest elements correctly, but only if you read all n elements first (O(n log n) build + K extractions).
+
+**The smarter approach:** Use a **min heap of size K** as a "filter." Think of it this way:
+- The heap represents "the best K elements seen so far"
+- The heap's root is the *worst of the best* — the "threshold to beat"
+- For each new element: if it beats the threshold (> root), it deserves to be in top-K. Evict the current weakest (root) and insert the new one.
+- If the new element doesn't beat the threshold, discard it immediately.
+
+**Why this works:** After processing all n elements, the heap contains exactly the K elements that survived all comparisons — the K largest.
+
+**Complexity comparison:**
+| Approach | Time | Space | Comment |
+|----------|------|-------|---------|
+| Sort all | O(n log n) | O(n) | Simple but wasteful |
+| Max heap, extract K | O(n + K log n) | O(n) | Still builds full heap |
+| **Min heap size K** | **O(n log K)** | **O(K)** | Only keeps K elements at a time |
+
+For large n and small K, O(n log K) << O(n log n).
+
 ### K Largest — Min Heap of Size K
 
 Maintain a min heap of size K. For each new element, if it's larger than the heap's minimum, pop the min and insert the new element.
 
 ```java
 int[] kLargest(int[] nums, int k) {
-    PriorityQueue<Integer> minHeap = new PriorityQueue<>();   // min heap
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();   // min heap: root = kth largest so far
     for (int x : nums) {
         minHeap.offer(x);
-        if (minHeap.size() > k) minHeap.poll();              // keep only top-k
+        if (minHeap.size() > k) minHeap.poll();   // evict the worst of top-K: it's too small
     }
+    // heap now contains exactly the K largest elements
     return minHeap.stream().mapToInt(x -> x).toArray();
 }
 ```
@@ -419,6 +459,32 @@ graph LR
 
 **Problem:** Merge K sorted arrays (or lists) into a single sorted sequence.
 
+**Building the intuition:**  
+If you had 2 sorted arrays, you'd use two pointers (merge step of mergesort). For K arrays, you'd need K pointers simultaneously — at each step, you must pick the minimum of K current pointers.
+
+**Naive:** At each step, scan all K front elements to find the minimum — O(K) per step, total O(N·K).
+
+**Better:** Keep all K current front elements in a min heap. The minimum is always the root — O(log K) per step, total O(N log K). After extracting the minimum, insert the *next* element from the same array.
+
+**Why store `[value, arrayIndex, elementIndex]` in the heap?** Because after extracting an element, we need to know *which array* it came from to fetch the next element. The heap entry must carry this bookkeeping.
+
+**Step-by-step trace on 3 arrays:**
+```
+Arrays: A=[1,4,7], B=[2,5,8], C=[3,6,9]
+
+Initial heap (min-heap by value): [(1,A,0), (2,B,0), (3,C,0)]
+
+Pop (1,A,0): result=[1], push next from A: (4,A,1)
+Heap: [(2,B,0), (3,C,0), (4,A,1)]
+
+Pop (2,B,0): result=[1,2], push (5,B,1)
+Heap: [(3,C,0), (4,A,1), (5,B,1)]
+
+Pop (3,C,0): result=[1,2,3], push (6,C,1)
+... continues ...
+Final: [1,2,3,4,5,6,7,8,9]
+```
+
 **Approach:** Use a min heap initialised with the first element from each array. Repeatedly extract the minimum and add the next element from that array.
 
 ```java
@@ -454,6 +520,35 @@ int[] mergeKSortedArrays(int[][] arrays) {
 ## 30.9 Running Median
 
 **Problem:** Given a stream of integers, find the median after each insertion.
+
+**Building the intuition step by step:**
+
+**Step 1: What is the median?**  
+The median is the "middle" value when all numbers are sorted. For an odd count, it's the exact middle. For even count, it's the average of the two middle values.
+
+**Step 2: What do we really need?**  
+We only need access to the *largest of the smaller half* and the *smallest of the larger half*. We don't need the full sorted order.
+
+**Step 3: What data structure gives O(1) access to the maximum? O(1) access to the minimum?**  
+A **max heap** gives O(1) access to the maximum. A **min heap** gives O(1) access to the minimum.
+
+**Step 4: Combining them:**
+- Keep the **smaller half** in a **max heap** (left). Its root = the largest of the smaller half.
+- Keep the **larger half** in a **min heap** (right). Its root = the smallest of the larger half.
+- Median = average of the two roots (even count), or root of the larger heap (odd count).
+
+**Step 5: Maintaining the balance invariant.**  
+After every insert, the two halves must satisfy:
+- All elements in left ≤ all elements in right (the split is correct)
+- `|left.size() - right.size()| ≤ 1` (sizes differ by at most 1)
+
+**Why the two-step insert?**
+```java
+left.offer(num);            // tentatively put in left
+right.offer(left.poll());   // push left's max to right (ensures left's max ≤ right's min)
+if (right.size() > left.size()) left.offer(right.poll());  // rebalance sizes
+```
+Step 1 ensures `num` starts somewhere. Step 2 fixes the cross-heap ordering (we can't be sure `num > right's min` without checking). Step 3 rebalances sizes if right became too large.
 
 **Approach:** Maintain two heaps:
 - **Max heap** (left half) — the smaller half of the numbers

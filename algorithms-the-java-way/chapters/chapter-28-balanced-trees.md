@@ -106,9 +106,25 @@ void updateHeight(AVLNode node) {
 
 Rotations are **O(1) operations** that restructure a subtree while preserving the BST property.
 
+**What a rotation does:**  
+A rotation changes the *structure* (which node is the root of a subtree) without changing the *inorder traversal sequence*. Since inorder sequence = sorted order = BST property, any rotation automatically preserves BST correctness.
+
+**Mental model:** Think of a rotation as "promoting" a child to become the new root of the subtree, and demoting the old root to become a child. The tricky part is correctly rehoming the displaced grandchild (`T3` in diagrams below).
+
+**Why rotations fix height imbalance:**  
+In a right rotation on node Z (left-heavy), Y (Z's left child) becomes the new root. Y is at height h, Z was at height h+2 (too tall). After rotation, the subtree root is at height h+1 — balanced.
+
+**Why only 1-2 rotations suffice:**  
+Each rotation reduces the height of the subtree by 1. LL/RR imbalances are fixed with one rotation. LR/RL imbalances have the new element in the "inner" grandchild position — one rotation would make it worse (the inner grandchild would become deeper). A preliminary rotation on the child straightens the "zigzag" into a "straight line", then one more rotation on the grandparent fixes it.
+
 ### Right Rotation (LL case)
 
-Applied when the left subtree is too tall and the imbalance is in the **left-left** direction.
+Applied when the left subtree is too tall and the imbalance is in the **left-left** direction (the tall child is the left child's left subtree).
+
+**Step by step:**
+1. Y (Z's left child) becomes the new subtree root
+2. Z becomes Y's right child
+3. Y's old right child (T3) becomes Z's new left child (must: T3's values are between Y and Z)
 
 ```
        z                   y
@@ -133,6 +149,8 @@ AVLNode rotateRight(AVLNode z) {
 ```
 
 ### Left Rotation (RR case)
+
+**Mirror image of right rotation:** Y (Z's right child) becomes the new root, Z becomes Y's left child, T2 (Y's old left) becomes Z's right child.
 
 Applied when the right subtree is too tall and the imbalance is in the **right-right** direction.
 
@@ -162,14 +180,28 @@ AVLNode rotateLeft(AVLNode z) {
 
 ## 28.4 AVL Insertion Case Analysis
 
-After inserting a new node, walk up the tree and re-balance each unbalanced node. Four cases:
+After inserting a new node, walk up the tree and re-balance each unbalanced node. Four cases arise based on which grandchild subtree received the new node:
 
-| Case | Trigger | Fix |
-|------|---------|-----|
-| **LL** | `bf = +2`, `bf(left) ≥ 0` | Right rotation at z |
-| **RR** | `bf = -2`, `bf(right) ≤ 0` | Left rotation at z |
-| **LR** | `bf = +2`, `bf(left) < 0` | Left rotation at y, then right rotation at z |
-| **RL** | `bf = -2`, `bf(right) > 0` | Right rotation at y, then left rotation at z |
+| Case | Meaning | Shape | Fix |
+|------|---------|-------|-----|
+| **LL** | New node in left child's **left** subtree | Straight left lean | 1 right rotation at Z |
+| **RR** | New node in right child's **right** subtree | Straight right lean | 1 left rotation at Z |
+| **LR** | New node in left child's **right** subtree | Zigzag left-right | Left rotation at Y (straighten), then right rotation at Z |
+| **RL** | New node in right child's **left** subtree | Zigzag right-left | Right rotation at Y (straighten), then left rotation at Z |
+
+**Why LR and RL need two rotations:**  
+In the LR case, the imbalance is a "zigzag": the tall path goes left then right. A single right rotation would put the inner grandchild in the wrong position. We first do a left rotation on Y (the left child) to convert the zigzag into a straight LL shape, then one right rotation on Z fixes it.
+
+```
+LR before:   After left-rotate Y:  After right-rotate Z:
+    Z               Z                   X
+   / \             / \                 / \
+  Y   T4          X   T4             Y   Z
+ / \             / \                / \ / \
+T1  X           Y  T3             T1 T2 T3 T4
+   / \         / \
+  T2  T3      T1  T2
+```
 
 ```java
 AVLNode balance(AVLNode node) {

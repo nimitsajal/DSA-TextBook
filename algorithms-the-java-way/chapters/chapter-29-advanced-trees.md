@@ -419,25 +419,127 @@ TreeNode deserializeDfs(Queue<String> q) {
 
 ## 29.7 Segment Tree Introduction
 
-A **Segment Tree** is a binary tree where:
-- Each **leaf** represents a single element of an array
-- Each **internal node** represents the aggregate (sum, min, max) of a range
-- The **root** represents the aggregate of the entire array
+### The Problem That Motivates the Segment Tree
 
-**Use case:** Range queries (sum, min, max) and point updates — both in O(log n).
+**Scenario:** You have an array and you must answer many queries of the form "what is the sum of elements from index l to r?" AND the array changes frequently (point updates).
+
+| Approach | Query time | Update time | Comment |
+|----------|-----------|-------------|--------|
+| Naive sum loop | O(n) | O(1) | Too slow for many queries |
+| Prefix sum array (Ch 10) | O(1) | O(n) | Rebuild on every update: unacceptable |
+| **Segment tree** | **O(log n)** | **O(log n)** | Best of both worlds |
+
+### What a Segment Tree Is
+
+A **Segment Tree** is a binary tree built on an array where:
+- Each **leaf node** stores one array element
+- Each **internal node** stores the sum (or min/max) of its children's ranges
+- The **root** covers the entire array `[0, n-1]`
+
+**Key idea:** We precompute sums for all "segments" (ranges) of the array in a hierarchical way. Any query range `[l, r]` can be decomposed into at most O(log n) pre-computed segments from the tree.
 
 ```
 Array: [1, 3, 5, 7, 9, 11]
+       idx: 0  1  2  3  4   5
 
-Segment Tree (sum):
-                36 [0,5]
-              /           \
-         9 [0,2]         27 [3,5]
-        /       \        /       \
-     4 [0,1]  5 [2,2] 16 [3,4] 11 [5,5]
-     /   \              /    \
-  1[0,0] 3[1,1]      7[3,3] 9[4,4]
+Segment Tree (each node = sum of its range):
+
+                  36 [0,5]          ← root: sum of entire array
+                 /         \
+          9 [0,2]           27 [3,5]  ← halves
+          /      \          /      \
+      4 [0,1]  5[2]   16[3,4]   11[5]  ← quarters
+      /    \            /    \
+   1[0]   3[1]       7[3]   9[4]        ← leaves (original elements)
 ```
+
+### Why Array Representation?
+
+The segment tree is a **complete binary tree**, so we store it in an array (same technique from Ch 25). For node at index `i`:
+- Left child: `2i + 1`
+- Right child: `2i + 2`
+- Array size: `4n` is a safe upper bound (the tree has at most `4n` nodes for `n` elements)
+
+### Build — O(n)
+
+**Intuition:** Build bottom-up. Leaves get the array values. Each internal node = sum of its two children. This is a standard postorder traversal: compute children first, then the parent.
+
+```java
+void build(int[] arr, int node, int lo, int hi) {
+    if (lo == hi) {                              // leaf: store array value
+        tree[node] = arr[lo];
+        return;
+    }
+    int mid = lo + (hi - lo) / 2;
+    build(arr, 2*node+1, lo,    mid);            // build left child
+    build(arr, 2*node+2, mid+1, hi);             // build right child
+    tree[node] = tree[2*node+1] + tree[2*node+2]; // internal: sum of children
+}
+```
+
+**Complexity:** O(n) — visits each of the ~2n tree nodes exactly once.
+
+### Query — O(log n)
+
+**Intuition:** Every query range `[l, r]` can be decomposed into at most O(log n) "completely covered" segments in the tree. The recursion has three cases:
+1. **No overlap:** Current segment `[lo, hi]` is completely outside `[l, r]` → return 0 (identity for sum)
+2. **Complete overlap:** Current segment `[lo, hi]` is completely inside `[l, r]` → return precomputed value
+3. **Partial overlap:** Split at mid, recurse left and right, combine answers
+
+```
+Query [2, 4] on array [1,3,5,7,9,11]:
+
+node=36[0,5]: partial → split
+  node=9[0,2]:  partial (l=2 cuts here) → split
+    node=4[0,1]: NO overlap (1 < 2) → return 0
+    node=5[2]:   complete overlap [2,2] inside [2,4] → return 5
+  node=27[3,5]: partial (r=4 cuts here) → split
+    node=16[3,4]: complete overlap → return 16
+    node=11[5]:   NO overlap (5 > 4) → return 0
+
+Total: 0 + 5 + 16 + 0 = 21  ✓ (arr[2]+arr[3]+arr[4] = 5+7+9 = 21)
+```
+
+```java
+int query(int node, int lo, int hi, int l, int r) {
+    if (r < lo || hi < l) return 0;              // Case 1: no overlap
+    if (l <= lo && hi <= r) return tree[node];   // Case 2: complete overlap
+    int mid = lo + (hi - lo) / 2;               // Case 3: partial overlap
+    return query(2*node+1, lo, mid,    l, r)     //   recurse left
+         + query(2*node+2, mid+1, hi,  l, r);   //   recurse right
+}
+```
+
+**Why O(log n)?** At each level, at most 4 nodes are visited (2 at the boundary on each side). With O(log n) levels, total = O(log n).
+
+### Update — O(log n)
+
+**Intuition:** When one array element changes, only the tree nodes on the **path from that leaf to the root** need to be updated — at most h = O(log n) nodes. Nodes in other subtrees are unaffected.
+
+```
+Update arr[3] = 10 (was 7):
+
+Path from leaf [3] to root:
+  leaf [3]: update tree value from 7 to 10
+  parent [3,4]: was 7+9=16, now 10+9=19
+  grandparent [3,5]: was 16+11=27, now 19+11=30
+  root [0,5]: was 36, now 36-7+10=39
+```
+
+```java
+void update(int node, int lo, int hi, int idx, int val) {
+    if (lo == hi) {                              // reached the leaf
+        tree[node] = val;
+        return;
+    }
+    int mid = lo + (hi - lo) / 2;
+    if (idx <= mid) update(2*node+1, lo, mid,    idx, val);  // go left
+    else            update(2*node+2, mid+1, hi,  idx, val);  // go right
+    tree[node] = tree[2*node+1] + tree[2*node+2];  // recompute this node
+}
+```
+
+### Complete Implementation
 
 ```java
 class SegmentTree {
@@ -446,7 +548,7 @@ class SegmentTree {
 
     SegmentTree(int[] arr) {
         n = arr.length;
-        tree = new int[4 * n];
+        tree = new int[4 * n];       // safe upper bound for tree size
         build(arr, 0, 0, n - 1);
     }
 
@@ -459,8 +561,8 @@ class SegmentTree {
     }
 
     int query(int node, int lo, int hi, int l, int r) {
-        if (r < lo || hi < l) return 0;             // out of range
-        if (l <= lo && hi <= r) return tree[node];  // fully within range
+        if (r < lo || hi < l) return 0;             // out of range: identity element
+        if (l <= lo && hi <= r) return tree[node];  // fully covered: use precomputed
         int mid = lo + (hi - lo) / 2;
         return query(2*node+1, lo, mid, l, r) + query(2*node+2, mid+1, hi, l, r);
     }
@@ -473,17 +575,19 @@ class SegmentTree {
         tree[node] = tree[2*node+1] + tree[2*node+2];
     }
 
-    // Convenience methods
+    // Public API: hide tree-node internals
     int query(int l, int r) { return query(0, 0, n-1, l, r); }
     void update(int idx, int val) { update(0, 0, n-1, idx, val); }
 }
 ```
 
 **Complexity:**
-- Build: O(n)
-- Query: O(log n)
-- Update: O(log n)
-- Space: O(n) (use 4n for safety)
+- Build: O(n) — each of ~2n nodes built once
+- Query: O(log n) — at most O(log n) nodes visited per query
+- Update: O(log n) — path from leaf to root has length O(log n)
+- Space: O(n) backing array of size 4n
+
+**How to change from sum to min/max:** Replace `+` with `Math.min()` / `Math.max()` in `build`, `query`, and `update`. Change the "identity element" returned for no-overlap case: 0 for sum, `Integer.MAX_VALUE` for min, `Integer.MIN_VALUE` for max.
 
 > [!NOTE]
 > **Why Segment Trees?**  

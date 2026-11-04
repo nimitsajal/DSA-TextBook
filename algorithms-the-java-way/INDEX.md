@@ -598,7 +598,7 @@
 
 ## Part X — Graph Theory and Algorithms
 
-### 🔲 Chapter 31 — Graph Fundamentals and Representation
+### ✅ [Chapter 31 — Graph Fundamentals and Representation](chapters/chapter-31-graph-fundamentals.md)
 
 - Graph terminology
 - Directed and undirected graphs
@@ -612,7 +612,7 @@
 
 ---
 
-### 🔲 Chapter 32 — Graph Traversal: BFS and DFS
+### ✅ [Chapter 32 — Graph Traversal: BFS and DFS](chapters/chapter-32-graph-traversal.md)
 
 - Breadth-First Search (BFS)
 - Depth-First Search (DFS)
@@ -627,7 +627,7 @@
 
 ---
 
-### 🔲 Chapter 33 — Shortest Path Algorithms
+### ✅ [Chapter 33 — Shortest Path Algorithms](chapters/chapter-33-shortest-paths.md)
 
 - Shortest path fundamentals
 - BFS for unweighted shortest paths
@@ -640,7 +640,7 @@
 
 ---
 
-### 🔲 Chapter 34 — Minimum Spanning Trees and Disjoint Sets
+### ✅ [Chapter 34 — Minimum Spanning Trees and Disjoint Sets](chapters/chapter-34-mst-and-dsu.md)
 
 - Spanning trees
 - MST properties
@@ -653,7 +653,7 @@
 
 ---
 
-### 🔲 Chapter 35 — Topological Sorting and DAGs
+### ✅ [Chapter 35 — Topological Sorting and DAGs](chapters/chapter-35-topological-sort.md)
 
 - DAG properties
 - Dependency resolution
@@ -665,7 +665,7 @@
 
 ---
 
-### 🔲 Chapter 36 — Advanced Graph Algorithms
+### ✅ [Chapter 36 — Advanced Graph Algorithms](chapters/chapter-36-advanced-graphs.md)
 
 - Strongly connected components
 - Kosaraju's algorithm
@@ -678,9 +678,13 @@
 
 ---
 
+### ✅ [Part 10 Review](chapters/part-10-review.md)
+
+---
+
 ## Part XI — Greedy Algorithms and Divide and Conquer
 
-### 🔲 Chapter 37 — Greedy Algorithms
+### ✅ [Chapter 37 — Greedy Algorithms](chapters/chapter-37-greedy-algorithms.md)
 
 - Greedy choice property
 - Optimal substructure
@@ -695,7 +699,7 @@
 
 ---
 
-### 🔲 Chapter 38 — Divide and Conquer
+### ✅ [Chapter 38 — Divide and Conquer](chapters/chapter-38-divide-and-conquer.md)
 
 - Divide, conquer and combine
 - Recursive decomposition
@@ -708,7 +712,7 @@
 
 ---
 
-### 🔲 Chapter 39 — Advanced Problem Decomposition
+### ✅ [Chapter 39 — Advanced Problem Decomposition](chapters/chapter-39-advanced-decomposition.md)
 
 - Choosing decomposition boundaries
 - Divide and conquer on arrays
@@ -717,6 +721,8 @@
 - Meet-in-the-middle
 - Small-to-large merging
 - Combining subproblem results
+
+### ✅ [Part 11 Review](chapters/part-11-review.md)
 
 ---
 

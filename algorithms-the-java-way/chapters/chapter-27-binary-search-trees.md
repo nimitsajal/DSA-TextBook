@@ -80,57 +80,70 @@ graph TD
 
 ## 27.2 Search
 
+**Intuition:** The BST property tells us at every node: if the target is smaller, it *must* be in the left subtree (all left values < current); if larger, it *must* be in the right subtree. So each comparison eliminates one entire subtree. This is exactly the same reasoning as binary search on a sorted array (Chapter 14) — but applied to a pointer-based structure instead of an indexed array.
+
+**Connection to binary search:** In a sorted array `[1,2,3,4,5,6,7]`, mid = arr[3] = 4. If target < 4, search left half. Same logic: in a BST with root 4, if target < 4, search left subtree.
+
+**How we arrived at the code:** The base case handles two termination conditions: (1) we fell off the tree (not found), (2) we found it. For the recursive case, the BST property directly tells us which child to recurse into.
+
 ```java
 TreeNode search(TreeNode root, int target) {
     if (root == null || root.val == target) return root;
-    if (target < root.val) return search(root.left,  target);
-    else                   return search(root.right, target);
+    if (target < root.val) return search(root.left,  target);  // must be in left
+    else                   return search(root.right, target);  // must be in right
 }
 
-// Iterative (preferred for deep trees)
+// Iterative (preferred for deep trees to avoid stack overflow)
 TreeNode searchIterative(TreeNode root, int target) {
     while (root != null && root.val != target) {
         root = target < root.val ? root.left : root.right;
     }
-    return root;
+    return root;   // null if not found, the node if found
 }
 ```
 
 **Complexity:**
-- Best/Average: O(log n) for balanced tree
-- Worst: O(n) for degenerate tree (linked list)
+- Time: O(h) where h = tree height. O(log n) for balanced, O(n) worst case (sorted insertion).
+- Space: O(h) recursive (call stack), O(1) iterative.
 
-**Intuition:** Each comparison eliminates an entire subtree. With a balanced tree of $n$ nodes and height $\log n$, search makes at most $\log_2 n + 1$ comparisons — matching binary search on a sorted array (Chapter 14) but in a dynamic structure.
+**Why iterative is preferred:** A degenerate BST (linked list shape) has height O(n). Recursive search would use O(n) stack frames, risking `StackOverflowError`. Iterative is O(1) space regardless.
 
 ---
 
 ## 27.3 Insertion
 
-New values are always inserted as **leaves**, preserving the BST property naturally.
+**Intuition:** To insert a new value while maintaining the BST property, follow the same path as search. When you reach a null slot (where search would have found nothing), that's precisely where the new node belongs. This is the only position that keeps all BST invariants intact.
+
+**Why always insert as a leaf?** Because inserting into the middle would require restructuring the entire subtree. Inserting at a leaf requires no restructuring — the new node has no children yet and inherits the correct position from the search path.
+
+**How the recursive code works:** `root.left = insert(root.left, val)` looks like it replaces the left child, but it only actually modifies it when the recursive call hits `null` and returns a new node. For non-null nodes, `insert` returns the same node unchanged, so the assignment is a no-op.
 
 ```java
 TreeNode insert(TreeNode root, int val) {
-    if (root == null) return new TreeNode(val);  // insert here
-    if (val < root.val) root.left  = insert(root.left,  val);
-    else if (val > root.val) root.right = insert(root.right, val);
-    // val == root.val: no duplicates; ignore (or handle as needed)
-    return root;
+    if (root == null) return new TreeNode(val);  // null slot found: place node here
+    if (val < root.val) root.left  = insert(root.left,  val);  // go left
+    else if (val > root.val) root.right = insert(root.right, val);  // go right
+    // val == root.val: duplicate; policy depends on problem (here: ignore)
+    return root;   // return self unchanged (unless we just inserted a child)
 }
 
-// Iterative insertion
+// Iterative insertion (O(1) space)
 TreeNode insertIterative(TreeNode root, int val) {
     TreeNode newNode = new TreeNode(val);
     if (root == null) return newNode;
     TreeNode curr = root, parent = null;
     while (curr != null) {
         parent = curr;
-        curr = val < curr.val ? curr.left : curr.right;
+        curr = val < curr.val ? curr.left : curr.right;  // follow search path
     }
+    // curr is null: parent is where we attach the new node
     if (val < parent.val) parent.left  = newNode;
     else                  parent.right = newNode;
     return root;
 }
 ```
+
+**Complexity:** O(h) time, O(h) space (recursive), O(1) space (iterative). Same reasoning as search: the insertion path is exactly the failed-search path.
 
 **Insertion trace for `[5, 3, 7, 1, 4]`:**
 
@@ -155,42 +168,59 @@ Result:
 
 ### Minimum and Maximum
 
-The **minimum** is the leftmost node; the **maximum** is the rightmost node.
+**Intuition:** In a BST, left < root < right at every node. So the smallest value is as far left as you can go, and the largest is as far right as you can go. No comparison needed — just follow the trail.
 
 ```java
 TreeNode minimum(TreeNode root) {
-    while (root.left != null) root = root.left;
-    return root;
+    while (root.left != null) root = root.left;  // keep going left until no left child
+    return root;   // leftmost node = minimum
 }
 
 TreeNode maximum(TreeNode root) {
-    while (root.right != null) root = root.right;
-    return root;
+    while (root.right != null) root = root.right;  // keep going right until no right child
+    return root;   // rightmost node = maximum
 }
 ```
 
+**Complexity:** O(h) time, O(1) space.
+
 ### Inorder Successor
 
-The **successor** of node $N$ is the node with the smallest value greater than $N$.val — the next node in inorder sequence.
+**Intuition:** The successor of node $N$ is the smallest value greater than $N$. Two cases:
+1. **N has a right child:** The successor is the minimum of the right subtree (smallest node that is definitely > N).
+2. **N has no right child:** Walk up the tree; the first time we come up from the left (i.e., the first ancestor where N is in the left subtree) is the successor.
+
+The iterative approach below handles both cases without needing parent pointers:
+
+**The successor of node $N$** is the node with the smallest value greater than $N$.val — the next node in inorder sequence.
+
+**How the algorithm works without parent pointers:**  
+We want the smallest value > p.val. As we walk down from root:
+- When `root.val > p.val`: root is a potential successor (it's larger than p), save it, then search left for a *smaller* valid candidate
+- When `root.val <= p.val`: root is not a valid successor (not larger), search right
+
+The last saved candidate when the loop ends is the successor.
 
 ```java
 TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
     TreeNode successor = null;
     while (root != null) {
         if (p.val < root.val) {
-            successor = root;        // candidate: root is greater than p
-            root = root.left;        // look for a smaller candidate
+            successor = root;   // root > p: valid candidate; keep looking left for smaller one
+            root = root.left;
         } else {
-            root = root.right;       // p.val >= root.val, go right
+            root = root.right;  // root <= p: not a candidate; go right
         }
     }
-    return successor;
+    return successor;   // last saved candidate = smallest value > p.val
 }
 ```
 
-**Two cases:**
-1. If `p` has a right subtree: successor = minimum of right subtree.
-2. If not: successor = the deepest ancestor for which `p` is in the left subtree.
+**Complexity:** O(h) time, O(1) space.
+
+**Two cases (why this works):**
+1. If `p` has a right subtree: the loop will eventually move into the right subtree and find its minimum — that's the successor.
+2. If `p` has no right subtree: the successor is the first ancestor from which we descended left — exactly what we saved as `successor`.
 
 ### Inorder Predecessor
 
@@ -215,51 +245,70 @@ TreeNode inorderPredecessor(TreeNode root, TreeNode p) {
 
 ## 27.5 Deletion
 
-Deletion is the hardest BST operation. Three cases:
+Deletion is the hardest BST operation. We must remove a node while maintaining the BST invariant.
 
-**Case 1: Node is a leaf** — simply remove it.
+**Building the intuition — why are there three cases?**
 
-**Case 2: Node has one child** — replace node with its child.
+The difficulty is that simply removing a node can orphan its children. We need to reconnect them correctly.
 
-**Case 3: Node has two children** — replace with **inorder successor** (or predecessor), then delete the successor from the right subtree.
+**Case 1: Node is a leaf** — no children, so nothing gets orphaned. Just remove it (return null to parent).
+
+**Case 2: Node has one child** — one child gets orphaned. The fix: replace the node with its single child. The child's subtree satisfies BST because it was already correctly positioned relative to the ancestors.
+
+**Case 3: Node has two children** — two subtrees get orphaned. We can't just attach both to the parent (parent has only one slot). Instead:
+- Find the **inorder successor** — the smallest value in the right subtree
+- Copy the successor's value into the current node (so current node's value is now valid)
+- Delete the successor from the right subtree (it's now a duplicate)
+
+**Why the inorder successor?** It's guaranteed to:
+1. Be > all values in the left subtree (preserves left subtree's invariant)
+2. Be the smallest of the right subtree (preserves right subtree's invariant)
+3. Have at most one child (a right child) — making it easy to delete via Case 1 or 2
 
 ```java
 TreeNode delete(TreeNode root, int val) {
-    if (root == null) return null;
+    if (root == null) return null;             // base case: not found
     if (val < root.val) {
-        root.left  = delete(root.left,  val);
+        root.left  = delete(root.left,  val);  // target in left subtree
     } else if (val > root.val) {
-        root.right = delete(root.right, val);
-    } else {
-        // Found the node to delete
-        if (root.left  == null) return root.right;   // Case 1 or 2
-        if (root.right == null) return root.left;    // Case 2
-        // Case 3: replace with inorder successor
-        TreeNode successor = minimum(root.right);
-        root.val   = successor.val;                  // copy successor value
-        root.right = delete(root.right, successor.val); // delete successor
+        root.right = delete(root.right, val);  // target in right subtree
+    } else {                                   // found the node to delete
+        if (root.left  == null) return root.right;   // Case 1 or 2: no left child, promote right
+        if (root.right == null) return root.left;    // Case 2: no right child, promote left
+        // Case 3: two children
+        TreeNode successor = minimum(root.right);    // find inorder successor
+        root.val   = successor.val;                  // copy successor value up
+        root.right = delete(root.right, successor.val); // delete successor (Case 1 or 2)
     }
-    return root;
+    return root;   // return this node (modified or unchanged) to its parent
 }
 ```
 
-**Deletion trace — delete 6 from the BST above:**
+**Step-by-step trace — delete node 5 from BST `[8, 3, 10, 1, 6, 9, 14, 4, 7, 13]`:**
 
 ```
-Node 6 has two children (4 and 7).
-Successor = minimum(right of 6) = 7.
-Copy 7 into node 6's position.
-Delete 7 from right subtree.
+Delete 5: not in tree. Let's delete 3 instead.
+
+Node 3 has two children: left=1, right=6.
+Case 3 applies.
+Successor = minimum(right subtree of 3) = minimum(6-subtree)
+  6's left child = 4. 4 has no left child. So minimum = 4.
+Copy 4 into node 3's slot: node now has value 4.
+Delete 4 from right subtree of (now-)4:
+  4 is a leaf → Case 1: return null.
 
 Before:          After:
-      5               5
+      8               8
      / \             / \
-    3   7           3   7
-   / \             / \
-  1   6           1   4
-     / \
-    4   7
+    3   10          4   10
+   / \  /  \       / \  /  \
+  1  6  9  14     1   6  9  14
+    / \    /         \ /
+   4   7  13          7 9
+                 (note: 4's left removed)
 ```
+
+**Complexity:** O(h) time (search path + successor search), O(h) space.
 
 > [!NOTE]
 > **Why Use the Successor for Deletion?**  

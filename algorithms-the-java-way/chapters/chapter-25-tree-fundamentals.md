@@ -364,6 +364,49 @@ int sum(TreeNode root) {
 }
 ```
 
+**Step-by-step trace of `count()` on a 5-node tree:**
+
+```
+Tree:        1
+            / \
+           2   3
+          / \
+         4   5
+
+count(1)
+  count(2)
+    count(4)
+      count(null) → 0
+      count(null) → 0
+    ← 1 + 0 + 0 = 1
+    count(5)
+      count(null) → 0
+      count(null) → 0
+    ← 1 + 0 + 0 = 1
+  ← 1 + 1 + 1 = 3
+  count(3)
+    count(null) → 0
+    count(null) → 0
+  ← 1 + 0 + 0 = 1
+← 1 + 3 + 1 = 5  ✓  (all 5 nodes counted)
+```
+
+**Step-by-step trace of `height()` on the same tree:**
+
+```
+height(1)
+  height(2)
+    height(4) → 1 + max(-1,-1) = 0
+    height(5) → 1 + max(-1,-1) = 0
+  ← 1 + max(0, 0) = 1
+  height(3) → 1 + max(-1,-1) = 0
+← 1 + max(1, 0) = 2   ✓ (longest path: 1→2→4 or 1→2→5)
+```
+
+**Complexity of all three functions:** O(n) time, O(h) space where h = tree height.  
+- **Time:** Every node is visited exactly once — no node is skipped.
+- **Space:** The recursion depth equals the tree height. In a balanced tree h = O(log n); in a skewed tree h = O(n).
+
 > [!NOTE]
 > **The "Trust the Recursion" Principle** (from Chapter 5)  
 > Do not mentally trace the entire call tree. Trust that `solve(root.left)` returns the correct answer for the left subtree, and `solve(root.right)` for the right. Focus only on: what does the current node contribute? This is the same inductive mindset used in mathematical proofs: assume it works for $n - 1$, prove it works for $n$.
@@ -374,6 +417,10 @@ int sum(TreeNode root) {
 
 ### Maximum Value
 
+**Intuition:** There is no special ordering in a general binary tree — the maximum could be anywhere. We must examine every node. At each node, the maximum is the largest of three candidates: the current value, the maximum in the left subtree, and the maximum in the right subtree.
+
+**How to arrive at this:** You cannot stop early (unlike BST where we know to go right). So we do a full postorder pass: compute left max, compute right max, compare both with current node's value.
+
 ```java
 int maxVal(TreeNode root) {
     if (root == null) return Integer.MIN_VALUE;
@@ -381,7 +428,15 @@ int maxVal(TreeNode root) {
 }
 ```
 
+**Complexity:** O(n) time — visits every node. O(h) space — recursion depth = tree height.
+
+---
+
 ### Contains Value
+
+**Intuition:** Again, no ordering — we must check every node. We can short-circuit with `||`: the moment we find the target in the left subtree, we don't need to explore the right.
+
+**How to think about it:** Ask at each node: "Is this the target? If not, is it somewhere below me on the left or the right?" The `||` operator in Java is short-circuit — it won't call `contains(right, target)` if `contains(left, target)` already returned `true`.
 
 ```java
 boolean contains(TreeNode root, int target) {
@@ -391,17 +446,55 @@ boolean contains(TreeNode root, int target) {
 }
 ```
 
+**Complexity:** O(n) worst case (target not found, or is the last leaf visited). O(1) best case (root is the target). O(h) space.
+
+---
+
 ### Is Identical
+
+**Intuition:** Two trees are identical if and only if:
+1. Their roots have the same value, AND
+2. Their left subtrees are identical, AND
+3. Their right subtrees are identical.
+
+The null cases must be handled first: if both are null — equal (empty subtrees are equal); if only one is null — not equal (one has a node, the other doesn't).
+
+**Key insight:** We compare *structure* and *values* simultaneously. This naturally falls out of the recursive definition.
 
 ```java
 boolean isSameTree(TreeNode p, TreeNode q) {
-    if (p == null && q == null) return true;
-    if (p == null || q == null) return false;
-    return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    if (p == null && q == null) return true;   // both empty: equal
+    if (p == null || q == null) return false;  // one empty, one not: unequal
+    return p.val == q.val                      // values match
+        && isSameTree(p.left,  q.left)         // left subtrees match
+        && isSameTree(p.right, q.right);       // right subtrees match
 }
 ```
 
+**Complexity:** O(min(n, m)) time where n, m are node counts — stops as soon as a mismatch is found. O(min(h1, h2)) space.
+
+---
+
 ### Is Symmetric (Mirror)
+
+**Intuition:** A tree is symmetric if its left and right subtrees are mirror images of each other. Two subtrees are mirrors if:
+1. Their root values are equal, AND
+2. The left child of the first mirrors the **right** child of the second (outer pair), AND
+3. The right child of the first mirrors the **left** child of the second (inner pair).
+
+**How to arrive at this:** Imagine folding the tree down the centre vertical axis. For nodes to match after folding, the outer children must match (left.left ↔ right.right) and the inner children must match (left.right ↔ right.left).
+
+```
+Symmetric tree:
+       1
+      / \
+     2   2
+    / \ / \
+   3  4 4  3
+
+Outer pair: left.left(3) ↔ right.right(3)  ✓
+Inner pair: left.right(4) ↔ right.left(4)  ✓
+```
 
 ```java
 boolean isSymmetric(TreeNode root) {
@@ -413,29 +506,53 @@ boolean isMirror(TreeNode a, TreeNode b) {
     if (a == null || b == null) return false;
     return a.val == b.val
         && isMirror(a.left,  b.right)   // outer pair
-        && isMirror(a.right, b.left);    // inner pair
+        && isMirror(a.right, b.left);   // inner pair
 }
 ```
+
+**Complexity:** O(n) time — each node compared once. O(h) space.
+
+---
 
 ### Is Height-Balanced
 
+**Naive approach (O(n²)):** For every node, call `height()` on left and right subtrees, then check the difference. But `height()` itself is O(n), and we do this for every node — total O(n²).
+
+**Better approach (O(n)):** Merge the height computation with the balance check in a single pass. At each node, compute height bottom-up. If we detect an imbalance, signal it immediately upward with a sentinel value instead of continuing to compute heights we don't need.
+
+**Why -2 as the sentinel?** The function normally returns heights which are ≥ -1 (height of null = -1, height of leaf = 0). So -2 is a value that the function can never return for a valid, balanced tree. Using it as a "failure" signal allows both the success value (actual height) and the failure signal to be returned through the same int return type — no need for a separate flag variable.
+
 ```java
 boolean isBalanced(TreeNode root) {
-    return checkHeight(root) != -2;
+    return checkHeight(root) != -2;   // -2 means "found imbalance somewhere below"
 }
 
 int checkHeight(TreeNode root) {
-    if (root == null) return -1;
+    if (root == null) return -1;             // empty tree has height -1 (valid)
     int lh = checkHeight(root.left);
-    if (lh == -2) return -2;             // propagate early failure
+    if (lh == -2) return -2;               // imbalance found in left subtree: propagate
     int rh = checkHeight(root.right);
-    if (rh == -2) return -2;
-    if (Math.abs(lh - rh) > 1) return -2; // current node is unbalanced
-    return 1 + Math.max(lh, rh);
+    if (rh == -2) return -2;               // imbalance found in right subtree: propagate
+    if (Math.abs(lh - rh) > 1) return -2; // THIS node is unbalanced: signal failure
+    return 1 + Math.max(lh, rh);           // balanced: return actual height
 }
 ```
 
-**Pattern:** Return -2 as a sentinel "failure" value — avoids a second pass and allows early exit.
+**Trace on an unbalanced tree:**
+```
+    1
+   /
+  2
+ /
+3
+
+checkHeight(3) → -1+1 = 0, lh-rh=0 ✓ → return 0
+checkHeight(2): lh=0, rh=-1, |0-(-1)|=1 ✓ → return 1
+checkHeight(1): lh=1, rh=-1, |1-(-1)|=2 > 1 → return -2
+isBalanced → -2 ≠ -2? false → NOT balanced
+```
+
+**Complexity:** O(n) time — single pass. O(h) space — recursion depth.
 
 ---
 
