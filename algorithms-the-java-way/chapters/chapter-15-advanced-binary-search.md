@@ -35,6 +35,12 @@ By the end of this chapter you will be able to:
 
 ---
 
+> [!NOTE]
+> **Historical Context**  
+> "Binary search on answer" is not attributed to a single inventor — it emerged organically from **competitive programming communities** in the 2000s, particularly on Codeforces and TopCoder. The key theoretical insight (that a monotonically ordered predicate over the answer space can be threshold-found in O(log range) steps) was well-known in numerical computing, but its application to discrete algorithmic problems — ship capacity, eating speed, minimum days — was popularised by contest problem-setters. Today, **"is this problem a binary-search-on-answer?"** is one of the first pattern-checks an experienced competitive programmer applies when seeing a minimisation or maximisation constraint.
+
+---
+
 ## 15.1 Binary Search on Answer
 
 The most powerful binary search pattern: instead of searching for a value in an array, **binary search over the answer space**.
@@ -111,6 +117,19 @@ int searchRotated(int[] nums, int target) {
     }
     return -1;
 }
+```
+
+```mermaid
+graph LR
+    A["Original: [0, 1, 2, 4, 5, 6, 7]"]
+    B["Rotated at pivot 4:\n[4, 5, 6, 7, 0, 1, 2]"]
+    C["lo=0 hi=6 mid=3: arr[3]=7\nnums[lo]=4 ≤ nums[mid]=7\n→ LEFT half [4,5,6,7] is sorted"]
+    D["Target=0: not in [4..7)\n→ search right: lo=4"]
+    E["lo=4 hi=6 mid=5: arr[5]=1\nnums[lo]=0 ≤ target=0 ≤ nums[hi]=2\n→ Found adjacent: lo=4, arr[4]=0 ✓"]
+
+    A --> B --> C --> D --> E
+    style E fill:#276749,color:#fff
+    style B fill:#1B2A4A,color:#C8A84B
 ```
 
 **Key invariant:** `nums[lo] <= nums[mid]` iff the left half is sorted (no rotation point in `[lo, mid]`).

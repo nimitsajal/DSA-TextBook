@@ -348,7 +348,7 @@
 
 ## Part V — Hashing and Lookup Structures
 
-### 🔲 Chapter 18 — Hash Tables: Design and Theory
+### ✅ Chapter 18 — [Hash Tables: Design and Theory](chapters/chapter-18-hash-tables.md)
 
 - Direct addressing
 - Hash functions
@@ -363,7 +363,7 @@
 
 ---
 
-### 🔲 Chapter 19 — HashMap, HashSet and Problem Patterns
+### ✅ Chapter 19 — [HashMap, HashSet and Problem Patterns](chapters/chapter-19-hashmap-patterns.md)
 
 - Java HashMap internals
 - Java HashSet internals
@@ -377,7 +377,7 @@
 
 ---
 
-### 🔲 Chapter 20 — Ordered Maps and Advanced Hashing
+### ✅ Chapter 20 — [Ordered Maps and Advanced Hashing](chapters/chapter-20-ordered-maps.md)
 
 - TreeMap and TreeSet
 - Sorted lookup and range queries
@@ -390,9 +390,21 @@
 
 ---
 
+### ✅ [Part V Review — Hashing and Lookup Structures, Consolidated](chapters/part-05-review.md)
+
+- Story: The Recommendation Engine (3-act narrative using all chapters)
+- Three-chapter concept map
+- Four principles of Part V
+- Three cross-chapter challenges
+- Part V lightning quiz (6 questions)
+- Grand Integration Problem: LFU Cache (3-part breakdown)
+- Preview of Part VI
+
+---
+
 ## Part VI — Linked Lists
 
-### 🔲 Chapter 21 — Linked List Foundations
+### ✅ Chapter 21 — [Linked List Foundations](chapters/chapter-21-linked-list-foundations.md)
 
 - Linked list concepts
 - Nodes and references
@@ -406,7 +418,7 @@
 
 ---
 
-### 🔲 Chapter 22 — Linked List Problem Patterns
+### ✅ Chapter 22 — [Linked List Problem Patterns](chapters/chapter-22-linked-list-patterns.md)
 
 - Reversal
 - Recursive reversal
@@ -421,9 +433,21 @@
 
 ---
 
+### ✅ [Part VI Review — Linked Lists, Consolidated](chapters/part-06-review.md)
+
+- Story: The Packet Router
+- Two-chapter concept map
+- Four principles
+- Three cross-chapter challenges
+- Part VI lightning quiz
+- Grand Integration Problem: LRU Cache (3-part breakdown)
+- Preview of Part VII
+
+---
+
 ## Part VII — Stacks, Queues and Deques
 
-### 🔲 Chapter 23 — Stacks and Their Applications
+### ✅ Chapter 23 — [Stacks and Their Applications](chapters/chapter-23-stacks.md)
 
 - Stack ADT
 - Array and linked-list implementations
@@ -437,7 +461,7 @@
 
 ---
 
-### 🔲 Chapter 24 — Queues, Deques and Circular Buffers
+### ✅ Chapter 24 — [Queues, Deques and Circular Buffers](chapters/chapter-24-queues-deques.md)
 
 - Queue ADT
 - Queue implementations
@@ -451,9 +475,21 @@
 
 ---
 
+### ✅ [Part VII Review — Stacks, Queues and Deques, Consolidated](chapters/part-07-review.md)
+
+- Story: The Expression Engine
+- Two-chapter concept map
+- Four principles
+- Three cross-chapter challenges (calculator, sliding-window min, BFS level-order)
+- Part VII lightning quiz (5 questions)
+- Grand Integration Problem: Maximal Rectangle (3-part breakdown)
+- Preview of Part VIII
+
+---
+
 ## Part VIII — Trees and Hierarchical Structures
 
-### 🔲 Chapter 25 — Tree Fundamentals and Binary Trees
+### ✅ Chapter 25 — [Tree Fundamentals and Binary Trees](chapters/chapter-25-tree-fundamentals.md)
 
 - Tree terminology
 - Root, leaf, parent, child and height
@@ -465,7 +501,7 @@
 
 ---
 
-### 🔲 Chapter 26 — Tree Traversal and Recursive Patterns
+### ✅ Chapter 26 — [Tree Traversal and Recursive Patterns](chapters/chapter-26-tree-traversal.md)
 
 - Preorder traversal
 - Inorder traversal
@@ -480,7 +516,7 @@
 
 ---
 
-### 🔲 Chapter 27 — Binary Search Trees
+### ✅ Chapter 27 — [Binary Search Trees](chapters/chapter-27-binary-search-trees.md)
 
 - BST property and invariant
 - Search, insertion and deletion
@@ -493,7 +529,7 @@
 
 ---
 
-### 🔲 Chapter 28 — Balanced Search Trees
+### ✅ Chapter 28 — [Balanced Search Trees](chapters/chapter-28-balanced-trees.md)
 
 - Why balance matters
 - AVL trees
@@ -505,7 +541,7 @@
 
 ---
 
-### 🔲 Chapter 29 — Advanced Tree Structures
+### ✅ Chapter 29 — [Advanced Tree Structures](chapters/chapter-29-advanced-trees.md)
 
 - N-ary trees
 - Tries and prefix trees
@@ -518,9 +554,21 @@
 
 ---
 
+### ✅ [Part VIII Review — Trees and Hierarchical Structures, Consolidated](chapters/part-08-review.md)
+
+- Story: The Version Control System (3-act narrative using all chapters)
+- Five-chapter concept map
+- Five principles of Part VIII
+- Three cross-chapter challenges
+- Part VIII lightning quiz (6 questions)
+- Grand Integration Problem: Git History Viewer (3-part breakdown)
+- Preview of Part IX
+
+---
+
 ## Part IX — Heaps and Priority Queues
 
-### 🔲 Chapter 30 — Heaps and Priority Queues
+### ✅ Chapter 30 — [Heaps and Priority Queues](chapters/chapter-30-heaps.md)
 
 - Complete binary tree property
 - Min heap and max heap
@@ -533,6 +581,18 @@
 - Top-K problems
 - K-way merge
 - Running median
+
+---
+
+### ✅ [Part IX Review — Heaps and Priority Queues, Consolidated](chapters/part-09-review.md)
+
+- Story: The Hospital Dispatch System (3-act narrative)
+- Chapter 30 concept map
+- Four principles of Part IX
+- Three cross-chapter challenges (merge K BSTs, sliding window median, task scheduler)
+- Part IX lightning quiz (5 questions)
+- Grand Integration Problem: Real-Time Leaderboard (3-part breakdown)
+- Preview of Part X
 
 ---
 

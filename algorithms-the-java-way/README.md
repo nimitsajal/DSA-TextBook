@@ -59,7 +59,25 @@ algorithms-the-java-way/
 | Chapter 16 | Elementary Sorting Algorithms | ✅ Complete |
 | Chapter 17 | Efficient and Non-Comparison Sorting | ✅ Complete |
 | Part IV Review | Searching and Sorting, Consolidated (interlude) | ✅ Complete |
-| Chapters 18–74 | See [INDEX.md](INDEX.md) | 🔲 Planned |
+| Chapter 18 | Hash Tables: Design and Theory | ✅ Complete |
+| Chapter 19 | HashMap, HashSet and Problem Patterns | ✅ Complete |
+| Chapter 20 | Ordered Maps and Advanced Hashing | ✅ Complete |
+| Part V Review | Hashing and Lookup Structures, Consolidated (interlude) | ✅ Complete |
+| Chapter 21 | Linked List Foundations | ✅ Complete |
+| Chapter 22 | Linked List Problem Patterns | ✅ Complete |
+| Part VI Review | Linked Lists, Consolidated (interlude) | ✅ Complete |
+| Chapter 23 | Stacks and Their Applications | ✅ Complete |
+| Chapter 24 | Queues, Deques and Circular Buffers | ✅ Complete |
+| Part VII Review | Stacks, Queues and Deques, Consolidated (interlude) | ✅ Complete |
+| Chapter 25 | Tree Fundamentals and Binary Trees | ✅ Complete |
+| Chapter 26 | Tree Traversal and Recursive Patterns | ✅ Complete |
+| Chapter 27 | Binary Search Trees | ✅ Complete |
+| Chapter 28 | Balanced Search Trees | ✅ Complete |
+| Chapter 29 | Advanced Tree Structures (N-ary, Tries, Segment Tree) | ✅ Complete |
+| Part VIII Review | Trees and Hierarchical Structures, Consolidated (interlude) | ✅ Complete |
+| Chapter 30 | Heaps and Priority Queues | ✅ Complete |
+| Part IX Review | Heaps and Priority Queues, Consolidated (interlude) | ✅ Complete |
+| Chapters 31–74 | See [INDEX.md](INDEX.md) | 🔲 Planned |
 
 ---
 

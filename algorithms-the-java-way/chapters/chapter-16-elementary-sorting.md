@@ -49,6 +49,10 @@ By the end of this chapter you will be able to:
 
 *Table 16.1: Sorting properties.*
 
+> [!NOTE]
+> **Historical Context**  
+> **Bubble sort** was first described by mathematicians working with early computers in the 1950s and given its now-famous name by Kenneth Iverson in his **1962** book *A Programming Language* (the same work that introduced the APL language). **Insertion sort** has no single inventor — it is the natural method used by card players and hand-sorters throughout human history, long predating computers. **Selection sort** appears in early computing textbooks without clear authorship. All three were well-understood by **1960**. These "naïve" algorithms are studied not because they are fast, but because understanding *why* they are slow — through the concept of **inversions** (Section 16.6) — is the same analysis that explains why merge sort is O(n log n).
+
 ---
 
 ## 16.2 Stability
@@ -163,6 +167,10 @@ void bubbleSort(int[] arr) {
 
 After pass 1: `5` is in its final position.
 
+> [!TIP]
+> **Did You Know?**  
+> In a **2007 Google interview** with Barack Obama during his presidential campaign, interviewer Eric Schmidt asked: *"What is the most efficient way to sort a million 32-bit integers?"* Obama replied: *"I think the bubble sort would be the wrong way to go."* The audience laughed and applauded. It was one of the first times a mainstream political figure demonstrated knowledge of computer science fundamentals on camera. The clip became widely shared among programmers as evidence that even non-engineers absorb which algorithms are notoriously slow.
+
 ---
 
 ## 16.5 Insertion Sort
@@ -201,6 +209,10 @@ void insertionSort(int[] arr) {
 - Space: O(1).
 - Stable: **Yes** — only shifts elements past strictly greater ones (not equal).
 - **Adaptive:** See Section 16.6.
+
+> [!TIP]
+> **Did You Know?**  
+> Insertion sort is the algorithm used **in practice** inside Java's `Arrays.sort` and Python's Timsort — but only for **small subarrays** (typically n ≤ 32). When a divide-and-conquer sort (merge sort, quicksort) produces a subproblem of size below the threshold, it switches to insertion sort. The reason: for small n, insertion sort's simplicity and cache-friendliness beat the overhead of recursive calls. The threshold is not arbitrary — it is empirically tuned for each hardware platform.
 
 ---
 

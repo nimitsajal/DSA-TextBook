@@ -91,6 +91,23 @@ Each comparison eliminates half the remaining candidates. After $k$ comparisons,
 
 ---
 
+> [!NOTE]
+> **Historical Context**  
+> Binary search was first described by John Mauchly in **1946**, but correct implementations proved surprisingly difficult — D. H. Lehmer published a formally correct version in **1960**, fourteen years later. In **1986**, Jon Bentley's *Programming Pearls* reported that roughly **90% of professional programmers could not write a correct binary search** after an hour of thought. The most common error was the off-by-one boundary bug. This is exactly why the invariant-based derivation in Section 14.3 matters: when you derive the boundary updates *from the invariant* instead of guessing, the bugs disappear.
+
+```mermaid
+graph TD
+    A["Array: [1, 3, 5, 7, 9, 11, 13, 15]\nTarget: 11\nlo=0, hi=7, mid=3"]
+    B["arr[3]=7 < 11\n→ lo = mid+1 = 4\nSearch right half"]
+    C["lo=4, hi=7, mid=5\narr[5]=11 == 11\n→ FOUND at index 5 ✓"]
+
+    A --> B --> C
+    style A fill:#1B2A4A,color:#C8A84B
+    style C fill:#276749,color:#fff
+```
+
+---
+
 ## 14.3 The Invariant-Based Derivation
 
 The safest way to write binary search is to define and maintain an **invariant** about what `lo` and `hi` represent throughout the loop.
@@ -175,6 +192,10 @@ int mid = (lo + hi) / 2;      // WRONG: lo + hi overflows if both are near Integ
 int mid = lo + (hi - lo) / 2; // CORRECT: difference never overflows
 int mid = (lo + hi) >>> 1;    // CORRECT: unsigned right shift
 ```
+
+> [!TIP]
+> **Did You Know?**  
+> Java's own `Arrays.binarySearch` contained this exact integer overflow bug (`(lo + hi) / 2`) from its very first release in **Java 1.2 (1998)** until it was silently corrected in **Java 6 update 2 (2007)** — nine years in the standard library. The bug was publicly exposed by **Josh Bloch** (Java's lead architect and author of *Effective Java*) in a 2006 blog post titled *"Extra, Extra — Read All About It: Nearly All Binary Searches and Mergesorts are Broken."* The post became one of the most circulated programming articles of its decade.
 
 ### Pitfall 2: Infinite Loop with `mid = (lo + hi) / 2` and `hi = mid`
 

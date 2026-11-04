@@ -85,6 +85,28 @@ void merge(int[] arr, int lo, int mid, int hi) {
 
 **Recurrence visualised:** At every level of the recursion tree, the total merge work is $O(n)$. There are $\log n$ levels → $O(n \log n)$ total.
 
+> [!NOTE]
+> **Historical Context — Merge Sort**  
+> Merge sort was invented by **John von Neumann** in **1945** while he was designing the EDVAC — one of the first stored-program computers. Von Neumann needed an efficient sorting procedure for the machine. His divide-and-conquer insight (split, recursively sort, merge) has remained architecturally unchanged for 80 years. It was later described in a 1948 report by Goldstine and von Neumann, one of the first formal analyses of an algorithm's running time.
+
+```mermaid
+graph TD
+    A["[38, 27, 43, 3, 9, 82]"] --> B["[38, 27, 43]"] & C["[3, 9, 82]"]
+    B --> D["[38]"] & E["[27, 43]"]
+    C --> F["[3]"] & G["[9, 82]"]
+    E --> H["[27]"] & I["[43]"]
+    G --> J["[9]"] & K["[82]"]
+    H & I --> L["[27, 43]"]
+    J & K --> M["[9, 82]"]
+    D & L --> N["[27, 38, 43]"]
+    F & M --> O["[3, 9, 82]"]
+    N & O --> P["[3, 9, 27, 38, 43, 82]"]
+    style P fill:#276749,color:#fff
+    style A fill:#1B2A4A,color:#C8A84B
+```
+
+*Each level processes O(n) elements; there are log n levels → O(n log n) total.*
+
 > [!TIP]
 > **Bottom-up merge sort** avoids recursion entirely. Start with runs of size 1, merge into runs of size 2, then 4, 8, ... This is the basis of **Timsort**: detect and exploit already-sorted runs (from insertion sort) instead of using fixed-size runs of 1.
 
@@ -136,6 +158,10 @@ void quickSortHoare(int[] arr, int lo, int hi) {
     quickSortHoare(arr, pivot + 1, hi);
 }
 ```
+
+> [!NOTE]
+> **Historical Context — Quicksort**  
+> Quicksort was invented by **Tony Hoare** in **1959/1960** while working as an exchange student in Moscow, studying machine translation. He needed to sort words efficiently for a dictionary lookup. After presenting his algorithm to colleagues, Hoare later recalled: *"I have called it Quicksort because it is not the best known and I could not think of a better name."* Quicksort is widely regarded as the most practically important sorting algorithm ever devised — it is the basis for the standard library sort in C (`qsort`), C++ (`std::sort`), and Java primitives (`Arrays.sort(int[])`). Hoare received the **Turing Award in 1980**.
 
 **Hoare vs Lomuto:** Hoare makes about 3× fewer swaps in practice and handles duplicates better. Lomuto is simpler to understand.
 
@@ -221,6 +247,10 @@ void heapify(int[] arr, int heapSize, int root) {
 - Time: O(n log n) — optimal worst case.
 - Space: **O(1)** — in-place! This is heap sort's key advantage over merge sort.
 - Stable: **No** — the heap operations can change relative order of equal elements.
+
+> [!NOTE]
+> **Historical Context — Heapsort**  
+> Heapsort was invented by **J. W. J. Williams** in **1964**, with the crucial O(n) build-heap insight contributed by **Robert Floyd** (also 1964) — the same Floyd of Floyd's cycle detection (Chapter 22) and the Floyd–Warshall shortest paths algorithm. Floyd's heapify insight changed how we analyse heap construction cost from O(n log n) to O(n), which made heap sort competitive. Williams and Floyd's contributions together formed the complete heapsort as known today.
 
 ---
 
@@ -334,6 +364,10 @@ void bucketSort(double[] arr) {
 | `Collections.sort(List)` | Timsort (via `Arrays.sort`) | ✅ Yes | Calls `toArray()` internally |
 
 *Table 17.2: Java sort internals.*
+
+> [!NOTE]
+> **Historical Context — Timsort**  
+> Timsort was invented by **Tim Peters** in **2002** for CPython. Peters observed that real-world data is almost never random — it typically contains long naturally sorted or reverse-sorted segments ("runs") from prior partial sorts, database indexes, or human-generated sequences. He designed Timsort specifically to exploit these runs. On already-sorted input it does O(n) comparisons. Java adopted Timsort in **Java 7 (2011)** for `Arrays.sort(Object[])`. The algorithm's name combines Tim's first name with "sort". Timsort was also adopted by Python, Android, and V8 (JavaScript engine).
 
 **Timsort** details:
 1. Scan for natural runs (ascending or descending segments). Reverse descending runs.
