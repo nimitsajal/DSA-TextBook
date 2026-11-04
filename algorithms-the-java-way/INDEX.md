@@ -167,7 +167,7 @@
 
 ---
 
-### 🔲 Chapter 8 — Two Pointers
+### ✅ Chapter 8 — [Two Pointers](chapters/chapter-08-two-pointers.md)
 
 - Opposite-direction pointers
 - Same-direction pointers
@@ -180,7 +180,7 @@
 
 ---
 
-### 🔲 Chapter 9 — Sliding Window
+### ✅ Chapter 9 — [Sliding Window](chapters/chapter-09-sliding-window.md)
 
 - Fixed-size sliding window
 - Variable-size sliding window
@@ -193,7 +193,7 @@
 
 ---
 
-### 🔲 Chapter 10 — Prefix Sums and Difference Arrays
+### ✅ Chapter 10 — [Prefix Sums and Difference Arrays](chapters/chapter-10-prefix-sums.md)
 
 - Running sums
 - Prefix sum construction
@@ -206,7 +206,7 @@
 
 ---
 
-### 🔲 Chapter 11 — Advanced Array Patterns
+### ✅ Chapter 11 — [Advanced Array Patterns](chapters/chapter-11-advanced-array-patterns.md)
 
 - Kadane's algorithm
 - Maximum subarray
@@ -221,9 +221,21 @@
 
 ---
 
+### ✅ [Part II Review — The Array Toolkit, Consolidated](chapters/part-02-review.md)
+
+- Story: The Data Pipeline Incident (5-act narrative)
+- Pattern map: how Chapters 7–11 interconnect
+- The five patterns summary table
+- Four cross-chapter challenges
+- Part II lightning quiz (10 questions)
+- Grand Integration Problem: Maximum Sum of Two Non-Overlapping Subarrays
+- Preview of Part III
+
+---
+
 ## Part III — Strings and String Algorithms
 
-### 🔲 Chapter 12 — String Fundamentals
+### ✅ Chapter 12 — [String Fundamentals](chapters/chapter-12-string-fundamentals.md)
 
 - Character encoding and Unicode
 - Java String internals
@@ -238,7 +250,7 @@
 
 ---
 
-### 🔲 Chapter 13 — Advanced String Algorithms
+### ✅ Chapter 13 — [Advanced String Algorithms](chapters/chapter-13-advanced-string-algorithms.md)
 
 - Naive pattern matching
 - Prefix and suffix concepts
@@ -253,9 +265,20 @@
 
 ---
 
+### ✅ [Part III Review — Strings, Consolidated](chapters/part-03-review.md)
+
+- Two-chapter concept map
+- The four string principles
+- Four cross-chapter challenges (anagram+sliding window, rotation via KMP, repeated unit via failure fn, palindrome prefix)
+- Part III lightning quiz (8 questions)
+- Grand Integration Problem: Longest Happy Prefix
+- Preview of Part IV
+
+---
+
 ## Part IV — Searching and Sorting
 
-### 🔲 Chapter 14 — Searching Fundamentals
+### ✅ Chapter 14 — [Searching Fundamentals](chapters/chapter-14-searching-fundamentals.md)
 
 - Linear search
 - Binary search intuition and derivation
@@ -269,7 +292,7 @@
 
 ---
 
-### 🔲 Chapter 15 — Advanced Binary Search Patterns
+### ✅ Chapter 15 — [Advanced Binary Search Patterns](chapters/chapter-15-advanced-binary-search.md)
 
 - Binary search on answer
 - Search in rotated arrays
@@ -283,7 +306,7 @@
 
 ---
 
-### 🔲 Chapter 16 — Elementary Sorting Algorithms
+### ✅ Chapter 16 — [Elementary Sorting Algorithms](chapters/chapter-16-elementary-sorting.md)
 
 - Sorting fundamentals
 - Stability
@@ -296,7 +319,7 @@
 
 ---
 
-### 🔲 Chapter 17 — Efficient and Non-Comparison Sorting
+### ✅ Chapter 17 — [Efficient and Non-Comparison Sorting](chapters/chapter-17-efficient-sorting.md)
 
 - Merge sort
 - Quick sort
@@ -309,6 +332,17 @@
 - Comparison sorting lower bound O(n log n)
 - Java Arrays.sort internals
 - Sorting objects and custom comparators
+
+---
+
+### ✅ [Part IV Review — Searching and Sorting, Consolidated](chapters/part-04-review.md)
+
+- Story analogy and four-chapter concept map
+- Six principles of Part IV
+- Four cross-chapter challenges (sort+binary search, binary search on answer+sort, inversion counting, non-comparison sort)
+- Part IV lightning quiz (8 questions)
+- Grand Integration Problem: H-Index (3 approaches — sorting, counting sort, binary search)
+- Preview of Part V
 
 ---
 

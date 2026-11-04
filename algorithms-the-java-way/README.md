@@ -46,7 +46,20 @@ algorithms-the-java-way/
 | Chapter 6 | Asymptotic Analysis: Measuring Algorithm Efficiency | ✅ Complete |
 | Part I Review | The Foundations, Revisited (interlude) | ✅ Complete |
 | Chapter 7 | Arrays: Foundations and Memory Model | ✅ Complete |
-| Chapters 8–74 | See [INDEX.md](INDEX.md) | 🔲 Planned |
+| Chapter 8 | Two Pointers | ✅ Complete |
+| Chapter 9 | Sliding Window | ✅ Complete |
+| Chapter 10 | Prefix Sums and Difference Arrays | ✅ Complete |
+| Chapter 11 | Advanced Array Patterns | ✅ Complete |
+| Part II Review | The Array Toolkit, Consolidated (interlude) | ✅ Complete |
+| Chapter 12 | String Fundamentals | ✅ Complete |
+| Chapter 13 | Advanced String Algorithms | ✅ Complete |
+| Part III Review | Strings, Consolidated (interlude) | ✅ Complete |
+| Chapter 14 | Searching Fundamentals | ✅ Complete |
+| Chapter 15 | Advanced Binary Search Patterns | ✅ Complete |
+| Chapter 16 | Elementary Sorting Algorithms | ✅ Complete |
+| Chapter 17 | Efficient and Non-Comparison Sorting | ✅ Complete |
+| Part IV Review | Searching and Sorting, Consolidated (interlude) | ✅ Complete |
+| Chapters 18–74 | See [INDEX.md](INDEX.md) | 🔲 Planned |
 
 ---
 
