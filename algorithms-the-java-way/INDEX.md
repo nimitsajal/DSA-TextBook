@@ -1,6 +1,6 @@
 # Algorithms: The Java Way — Complete Curriculum Index
 
-**18 Parts · 73 Chapters · Full Computer Science Curriculum**
+**18 Parts · 74 Chapters · Full Computer Science Curriculum**
 
 > ✅ = Chapter file exists and is complete · 🔲 = Planned (index entry only, no chapter file yet)
 
@@ -47,7 +47,7 @@
 
 ---
 
-### 🔲 Chapter 2 — Mathematical Foundations for Programmers
+### ✅ Chapter 2 — [Mathematical Foundations for Programmers](chapters/chapter-02-mathematical-foundations.md)
 
 - Number systems: binary, decimal, octal and hexadecimal
 - Place values and positional representation
@@ -64,7 +64,24 @@
 
 ---
 
-### 🔲 Chapter 3 — Java Toolkit for Data Structures and Algorithms
+### ✅ Chapter 3 — [Bit Manipulation: The Language of Hardware](chapters/chapter-03-bit-manipulation.md)
+
+- Why bit manipulation matters
+- Bitwise operators: AND, OR, XOR and NOT with truth tables
+- Shift operators: left shift, arithmetic right shift, logical right shift
+- Setting, clearing, toggling and reading individual bits
+- Bit masks and masking patterns
+- XOR properties and interview patterns
+- Detecting and working with powers of two
+- Counting set bits: naive, Brian Kernighan's algorithm, Integer.bitCount()
+- Hamming weight and Hamming distance
+- Isolating the lowest set bit and turning it off
+- Building a reusable bit operations toolkit in Java
+- Java-specific pitfalls: operator precedence, shift semantics, sign extension
+
+---
+
+### ✅ Chapter 4 — [Java Toolkit for Data Structures and Algorithms](chapters/chapter-04-java-toolkit.md)
 
 - Java execution model and JVM basics
 - Primitive types, wrappers and type conversion
@@ -84,7 +101,7 @@
 
 ---
 
-### 🔲 Chapter 4 — Recursion: Learning to Think Recursively
+### ✅ Chapter 5 — [Recursion: Learning to Think Recursively](chapters/chapter-05-recursion.md)
 
 - What is recursion?
 - Recursive vs iterative thinking
@@ -104,7 +121,7 @@
 
 ---
 
-### 🔲 Chapter 5 — Asymptotic Analysis: Measuring Algorithm Efficiency
+### ✅ Chapter 6 — [Asymptotic Analysis: Measuring Algorithm Efficiency](chapters/chapter-06-asymptotic-analysis.md)
 
 - Why efficiency matters
 - Input size and growth rates
@@ -125,7 +142,7 @@
 
 ## Part II — Arrays and Array Patterns
 
-### 🔲 Chapter 6 — Arrays: Foundations and Memory Model
+### 🔲 Chapter 7 — Arrays: Foundations and Memory Model
 
 - Array representation in Java
 - Indexing and random access
@@ -138,7 +155,7 @@
 
 ---
 
-### 🔲 Chapter 7 — Two Pointers
+### 🔲 Chapter 8 — Two Pointers
 
 - Opposite-direction pointers
 - Same-direction pointers
@@ -151,7 +168,7 @@
 
 ---
 
-### 🔲 Chapter 8 — Sliding Window
+### 🔲 Chapter 9 — Sliding Window
 
 - Fixed-size sliding window
 - Variable-size sliding window
@@ -164,7 +181,7 @@
 
 ---
 
-### 🔲 Chapter 9 — Prefix Sums and Difference Arrays
+### 🔲 Chapter 10 — Prefix Sums and Difference Arrays
 
 - Running sums
 - Prefix sum construction
@@ -177,7 +194,7 @@
 
 ---
 
-### 🔲 Chapter 10 — Advanced Array Patterns
+### 🔲 Chapter 11 — Advanced Array Patterns
 
 - Kadane's algorithm
 - Maximum subarray
@@ -194,7 +211,7 @@
 
 ## Part III — Strings and String Algorithms
 
-### 🔲 Chapter 11 — String Fundamentals
+### 🔲 Chapter 12 — String Fundamentals
 
 - Character encoding and Unicode
 - Java String internals
@@ -209,7 +226,7 @@
 
 ---
 
-### 🔲 Chapter 12 — Advanced String Algorithms
+### 🔲 Chapter 13 — Advanced String Algorithms
 
 - Naive pattern matching
 - Prefix and suffix concepts
@@ -226,7 +243,7 @@
 
 ## Part IV — Searching and Sorting
 
-### 🔲 Chapter 13 — Searching Fundamentals
+### 🔲 Chapter 14 — Searching Fundamentals
 
 - Linear search
 - Binary search intuition and derivation
@@ -240,7 +257,7 @@
 
 ---
 
-### 🔲 Chapter 14 — Advanced Binary Search Patterns
+### 🔲 Chapter 15 — Advanced Binary Search Patterns
 
 - Binary search on answer
 - Search in rotated arrays
@@ -254,7 +271,7 @@
 
 ---
 
-### 🔲 Chapter 15 — Elementary Sorting Algorithms
+### 🔲 Chapter 16 — Elementary Sorting Algorithms
 
 - Sorting fundamentals
 - Stability
@@ -267,7 +284,7 @@
 
 ---
 
-### 🔲 Chapter 16 — Efficient and Non-Comparison Sorting
+### 🔲 Chapter 17 — Efficient and Non-Comparison Sorting
 
 - Merge sort
 - Quick sort
@@ -285,7 +302,7 @@
 
 ## Part V — Hashing and Lookup Structures
 
-### 🔲 Chapter 17 — Hash Tables: Design and Theory
+### 🔲 Chapter 18 — Hash Tables: Design and Theory
 
 - Direct addressing
 - Hash functions
@@ -300,7 +317,7 @@
 
 ---
 
-### 🔲 Chapter 18 — HashMap, HashSet and Problem Patterns
+### 🔲 Chapter 19 — HashMap, HashSet and Problem Patterns
 
 - Java HashMap internals
 - Java HashSet internals
@@ -314,7 +331,7 @@
 
 ---
 
-### 🔲 Chapter 19 — Ordered Maps and Advanced Hashing
+### 🔲 Chapter 20 — Ordered Maps and Advanced Hashing
 
 - TreeMap and TreeSet
 - Sorted lookup and range queries
@@ -329,7 +346,7 @@
 
 ## Part VI — Linked Lists
 
-### 🔲 Chapter 20 — Linked List Foundations
+### 🔲 Chapter 21 — Linked List Foundations
 
 - Linked list concepts
 - Nodes and references
@@ -343,7 +360,7 @@
 
 ---
 
-### 🔲 Chapter 21 — Linked List Problem Patterns
+### 🔲 Chapter 22 — Linked List Problem Patterns
 
 - Reversal
 - Recursive reversal
@@ -360,7 +377,7 @@
 
 ## Part VII — Stacks, Queues and Deques
 
-### 🔲 Chapter 22 — Stacks and Their Applications
+### 🔲 Chapter 23 — Stacks and Their Applications
 
 - Stack ADT
 - Array and linked-list implementations
@@ -374,7 +391,7 @@
 
 ---
 
-### 🔲 Chapter 23 — Queues, Deques and Circular Buffers
+### 🔲 Chapter 24 — Queues, Deques and Circular Buffers
 
 - Queue ADT
 - Queue implementations
@@ -390,7 +407,7 @@
 
 ## Part VIII — Trees and Hierarchical Structures
 
-### 🔲 Chapter 24 — Tree Fundamentals and Binary Trees
+### 🔲 Chapter 25 — Tree Fundamentals and Binary Trees
 
 - Tree terminology
 - Root, leaf, parent, child and height
@@ -402,7 +419,7 @@
 
 ---
 
-### 🔲 Chapter 25 — Tree Traversal and Recursive Patterns
+### 🔲 Chapter 26 — Tree Traversal and Recursive Patterns
 
 - Preorder traversal
 - Inorder traversal
@@ -417,7 +434,7 @@
 
 ---
 
-### 🔲 Chapter 26 — Binary Search Trees
+### 🔲 Chapter 27 — Binary Search Trees
 
 - BST property and invariant
 - Search, insertion and deletion
@@ -430,7 +447,7 @@
 
 ---
 
-### 🔲 Chapter 27 — Balanced Search Trees
+### 🔲 Chapter 28 — Balanced Search Trees
 
 - Why balance matters
 - AVL trees
@@ -442,7 +459,7 @@
 
 ---
 
-### 🔲 Chapter 28 — Advanced Tree Structures
+### 🔲 Chapter 29 — Advanced Tree Structures
 
 - N-ary trees
 - Tries and prefix trees
@@ -457,7 +474,7 @@
 
 ## Part IX — Heaps and Priority Queues
 
-### 🔲 Chapter 29 — Heaps and Priority Queues
+### 🔲 Chapter 30 — Heaps and Priority Queues
 
 - Complete binary tree property
 - Min heap and max heap
@@ -475,7 +492,7 @@
 
 ## Part X — Graph Theory and Algorithms
 
-### 🔲 Chapter 30 — Graph Fundamentals and Representation
+### 🔲 Chapter 31 — Graph Fundamentals and Representation
 
 - Graph terminology
 - Directed and undirected graphs
@@ -489,7 +506,7 @@
 
 ---
 
-### 🔲 Chapter 31 — Graph Traversal: BFS and DFS
+### 🔲 Chapter 32 — Graph Traversal: BFS and DFS
 
 - Breadth-First Search (BFS)
 - Depth-First Search (DFS)
@@ -504,7 +521,7 @@
 
 ---
 
-### 🔲 Chapter 32 — Shortest Path Algorithms
+### 🔲 Chapter 33 — Shortest Path Algorithms
 
 - Shortest path fundamentals
 - BFS for unweighted shortest paths
@@ -517,7 +534,7 @@
 
 ---
 
-### 🔲 Chapter 33 — Minimum Spanning Trees and Disjoint Sets
+### 🔲 Chapter 34 — Minimum Spanning Trees and Disjoint Sets
 
 - Spanning trees
 - MST properties
@@ -530,7 +547,7 @@
 
 ---
 
-### 🔲 Chapter 34 — Topological Sorting and DAGs
+### 🔲 Chapter 35 — Topological Sorting and DAGs
 
 - DAG properties
 - Dependency resolution
@@ -542,7 +559,7 @@
 
 ---
 
-### 🔲 Chapter 35 — Advanced Graph Algorithms
+### 🔲 Chapter 36 — Advanced Graph Algorithms
 
 - Strongly connected components
 - Kosaraju's algorithm
@@ -557,7 +574,7 @@
 
 ## Part XI — Greedy Algorithms and Divide and Conquer
 
-### 🔲 Chapter 36 — Greedy Algorithms
+### 🔲 Chapter 37 — Greedy Algorithms
 
 - Greedy choice property
 - Optimal substructure
@@ -572,7 +589,7 @@
 
 ---
 
-### 🔲 Chapter 37 — Divide and Conquer
+### 🔲 Chapter 38 — Divide and Conquer
 
 - Divide, conquer and combine
 - Recursive decomposition
@@ -585,7 +602,7 @@
 
 ---
 
-### 🔲 Chapter 38 — Advanced Problem Decomposition
+### 🔲 Chapter 39 — Advanced Problem Decomposition
 
 - Choosing decomposition boundaries
 - Divide and conquer on arrays
@@ -599,7 +616,7 @@
 
 ## Part XII — Dynamic Programming
 
-### 🔲 Chapter 39 — Dynamic Programming Foundations
+### 🔲 Chapter 40 — Dynamic Programming Foundations
 
 - What is DP?
 - Overlapping subproblems
@@ -614,7 +631,7 @@
 
 ---
 
-### 🔲 Chapter 40 — One-Dimensional and Sequence DP
+### 🔲 Chapter 41 — One-Dimensional and Sequence DP
 
 - Climbing stairs
 - House robber
@@ -627,7 +644,7 @@
 
 ---
 
-### 🔲 Chapter 41 — Two-Dimensional and Grid DP
+### 🔲 Chapter 42 — Two-Dimensional and Grid DP
 
 - Grid path counting
 - Obstacle paths
@@ -640,7 +657,7 @@
 
 ---
 
-### 🔲 Chapter 42 — Advanced Dynamic Programming
+### 🔲 Chapter 43 — Advanced Dynamic Programming
 
 - Longest common subsequence
 - Edit distance
@@ -657,7 +674,7 @@
 
 ## Part XIII — Backtracking and Bit Manipulation
 
-### 🔲 Chapter 43 — Backtracking and Combinatorial Search
+### 🔲 Chapter 44 — Backtracking and Combinatorial Search
 
 - State-space search
 - Decision trees
@@ -674,26 +691,22 @@
 
 ---
 
-### 🔲 Chapter 44 — Bit Manipulation
+### 🔲 Chapter 45 — Bitmask Patterns and Competitive Programming
 
-- Binary representation
-- Java bitwise operators
-- AND, OR, XOR and NOT
-- Left and right shifts
-- Signed and unsigned right shifts
-- Setting, clearing and toggling bits
-- Checking bits
-- Counting set bits
-- Brian Kernighan's algorithm
-- Bit masks
-- XOR patterns
-- Powers of two
-- Bitmasking subsets
-- Java bit-width pitfalls
+- Revisiting bitmask fundamentals (see Chapter 3 for foundations)
+- Representing sets with integer bitmasks
+- Iterating over all subsets of a bitmask
+- Iterating over all submasks of a given mask
+- Bitmask DP: state design and transitions
+- Classic bitmask DP problems (TSP, assignment, covering)
+- State compression techniques
+- Bitwise tricks for competitive programming
+- Java int and long capacity limits for bitmask DP
+- Common pitfalls and debugging bitmask code
 
 ---
 
-### 🔲 Chapter 45 — Advanced Bitmasking and State Representation
+### 🔲 Chapter 46 — Advanced Bitmasking and State Representation
 
 - Representing sets with bitmasks
 - Subset enumeration
@@ -708,7 +721,7 @@
 
 ## Part XIV — Advanced Data Structures and Range Queries
 
-### 🔲 Chapter 46 — Segment Trees
+### 🔲 Chapter 47 — Segment Trees
 
 - Range queries
 - Segment tree structure
@@ -722,7 +735,7 @@
 
 ---
 
-### 🔲 Chapter 47 — Fenwick Trees and Range Query Techniques
+### 🔲 Chapter 48 — Fenwick Trees and Range Query Techniques
 
 - Prefix sum revisit
 - Fenwick tree (Binary Indexed Tree)
@@ -735,7 +748,7 @@
 
 ---
 
-### 🔲 Chapter 48 — Advanced Tree-Based Data Structures
+### 🔲 Chapter 49 — Advanced Tree-Based Data Structures
 
 - Sparse tables
 - Range minimum queries (RMQ)
@@ -746,7 +759,7 @@
 
 ---
 
-### 🔲 Chapter 49 — Advanced Union-Find and Connectivity
+### 🔲 Chapter 50 — Advanced Union-Find and Connectivity
 
 - DSU optimisations
 - Offline connectivity
@@ -756,7 +769,7 @@
 
 ---
 
-### 🔲 Chapter 50 — Advanced String and Prefix Structures
+### 🔲 Chapter 51 — Advanced String and Prefix Structures
 
 - Trie optimisation
 - Compressed tries (Patricia/radix trees)
@@ -770,7 +783,7 @@
 
 ## Part XV — Advanced Algorithmic Techniques
 
-### 🔲 Chapter 51 — Monotonic Structures and Contribution Techniques
+### 🔲 Chapter 52 — Monotonic Structures and Contribution Techniques
 
 - Monotonic stacks
 - Monotonic queues
@@ -782,7 +795,7 @@
 
 ---
 
-### 🔲 Chapter 52 — Two Heaps, K-Way Merge and Top-K Patterns
+### 🔲 Chapter 53 — Two Heaps, K-Way Merge and Top-K Patterns
 
 - Two heaps pattern
 - Running median
@@ -794,7 +807,7 @@
 
 ---
 
-### 🔲 Chapter 53 — Randomized Algorithms
+### 🔲 Chapter 54 — Randomized Algorithms
 
 - Randomisation
 - Randomised quicksort
@@ -805,7 +818,7 @@
 
 ---
 
-### 🔲 Chapter 54 — Computational Geometry
+### 🔲 Chapter 55 — Computational Geometry
 
 - Points, lines and vectors
 - Distance
@@ -818,7 +831,7 @@
 
 ---
 
-### 🔲 Chapter 55 — Advanced Mathematical Algorithms
+### 🔲 Chapter 56 — Advanced Mathematical Algorithms
 
 - Sieve of Eratosthenes
 - Prime factorisation
@@ -831,7 +844,7 @@
 
 ---
 
-### 🔲 Chapter 56 — Advanced Optimisation Techniques
+### 🔲 Chapter 57 — Advanced Optimisation Techniques
 
 - Meet-in-the-middle
 - Coordinate compression
@@ -846,7 +859,7 @@
 
 ## Part XVI — Data Structure Design and Systems-Oriented Problems
 
-### 🔲 Chapter 57 — Designing Data Structures
+### 🔲 Chapter 58 — Designing Data Structures
 
 - Abstract data types
 - Internal representations
@@ -858,7 +871,7 @@
 
 ---
 
-### 🔲 Chapter 58 — Cache and Eviction Design
+### 🔲 Chapter 59 — Cache and Eviction Design
 
 - LRU cache
 - LFU cache
@@ -869,7 +882,7 @@
 
 ---
 
-### 🔲 Chapter 59 — Advanced Design Problems
+### 🔲 Chapter 60 — Advanced Design Problems
 
 - Design Twitter
 - Time-based key-value store
@@ -883,7 +896,7 @@
 
 ## Part XVII — Algorithmic Paradigms and Complexity Theory
 
-### 🔲 Chapter 60 — Algorithmic Paradigms
+### 🔲 Chapter 61 — Algorithmic Paradigms
 
 - Brute force
 - Decrease and conquer
@@ -897,7 +910,7 @@
 
 ---
 
-### 🔲 Chapter 61 — Advanced Complexity Theory
+### 🔲 Chapter 62 — Advanced Complexity Theory
 
 - P, NP and NP-completeness
 - Polynomial vs exponential time
@@ -909,7 +922,7 @@
 
 ---
 
-### 🔲 Chapter 62 — Memory, Performance and Java Optimisation
+### 🔲 Chapter 63 — Memory, Performance and Java Optimisation
 
 - JVM memory basics
 - Stack and heap
@@ -924,7 +937,7 @@
 
 ---
 
-### 🔲 Chapter 63 — Competitive Programming and Java Problem-Solving Toolkit
+### 🔲 Chapter 64 — Competitive Programming and Java Problem-Solving Toolkit
 
 - LeetCode environment
 - Java versions in competitive programming
@@ -942,7 +955,7 @@
 
 ## Part XVIII — Interview Mastery
 
-### 🔲 Chapter 64 — Problem-Solving Patterns Catalogue
+### 🔲 Chapter 65 — Problem-Solving Patterns Catalogue
 
 - Two pointers
 - Sliding window
@@ -963,7 +976,7 @@
 
 ---
 
-### 🔲 Chapter 65 — Recognising Patterns in Unfamiliar Problems
+### 🔲 Chapter 66 — Recognising Patterns in Unfamiliar Problems
 
 - Reading constraints
 - Hidden structure
@@ -976,7 +989,7 @@
 
 ---
 
-### 🔲 Chapter 66 — Hard Problem Solving
+### 🔲 Chapter 67 — Hard Problem Solving
 
 - Multi-pattern problems
 - Graph + DP
@@ -989,7 +1002,7 @@
 
 ---
 
-### 🔲 Chapter 67 — Google-Style Interview Framework
+### 🔲 Chapter 68 — Google-Style Interview Framework
 
 - Understanding the problem
 - Clarifying questions
@@ -1003,7 +1016,7 @@
 
 ---
 
-### 🔲 Chapter 68 — Coding Interview Practice
+### 🔲 Chapter 69 — Coding Interview Practice
 
 - Easy foundations
 - Medium mastery
@@ -1015,7 +1028,7 @@
 
 ---
 
-### 🔲 Chapter 69 — Advanced Interview Topics
+### 🔲 Chapter 70 — Advanced Interview Topics
 
 - Algorithm design under constraints
 - Follow-up questions
@@ -1027,7 +1040,7 @@
 
 ---
 
-### 🔲 Chapter 70 — Interview-Level Data Structure Design
+### 🔲 Chapter 71 — Interview-Level Data Structure Design
 
 - LRU and LFU
 - Complex API design
@@ -1038,7 +1051,7 @@
 
 ---
 
-### 🔲 Chapter 71 — Problem-Solving Communication
+### 🔲 Chapter 72 — Problem-Solving Communication
 
 - Thinking aloud
 - Structuring explanations
@@ -1050,7 +1063,7 @@
 
 ---
 
-### 🔲 Chapter 72 — Building an Independent Problem-Solving Practice
+### 🔲 Chapter 73 — Building an Independent Problem-Solving Practice
 
 - Deliberate practice
 - Spaced repetition
@@ -1061,7 +1074,7 @@
 
 ---
 
-### 🔲 Chapter 73 — Final Mastery and Mock Interview Collection
+### 🔲 Chapter 74 — Final Mastery and Mock Interview Collection
 
 - Mixed-topic problems
 - Unseen problem sets

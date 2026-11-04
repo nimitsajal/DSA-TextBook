@@ -39,11 +39,12 @@ algorithms-the-java-way/
 | Chapter | Title | Status |
 |---------|-------|--------|
 | Chapter 1 | Algorithmic Thinking: The Art of Problem Solving | ✅ Complete |
-| Chapter 2 | Mathematical Foundations for Programmers | 🔲 Planned |
-| Chapter 3 | Java Toolkit for Data Structures and Algorithms | 🔲 Planned |
-| Chapter 4 | Recursion: Learning to Think Recursively | 🔲 Planned |
-| Chapter 5 | Asymptotic Analysis: Measuring Algorithm Efficiency | 🔲 Planned |
-| Chapters 6–73 | See [INDEX.md](INDEX.md) | 🔲 Planned |
+| Chapter 2 | Mathematical Foundations for Programmers | ✅ Complete |
+| Chapter 3 | Bit Manipulation: The Language of Hardware | ✅ Complete |
+| Chapter 4 | Java Toolkit for Data Structures and Algorithms | ✅ Complete |
+| Chapter 5 | Recursion: Learning to Think Recursively | ✅ Complete |
+| Chapter 6 | Asymptotic Analysis: Measuring Algorithm Efficiency | ✅ Complete |
+| Chapters 7–74 | See [INDEX.md](INDEX.md) | 🔲 Planned |
 
 ---
 
